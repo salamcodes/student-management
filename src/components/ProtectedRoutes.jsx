@@ -16,7 +16,7 @@ const ProtectedRoutes = ({ Component, role }) => {
                 setLoading(false)
                 setIsAllowed(false)
                 navigate('login')
-
+                return
             }
 
             try {
@@ -37,11 +37,12 @@ const ProtectedRoutes = ({ Component, role }) => {
                 if (role.includes(userData.role)) {
                     console.log(userData.role)
                     setIsAllowed(true)
+                    setLoading(false)
                 } else {
                     setIsAllowed(false)
                 }
 
-
+                setLoading(false)
             } catch (error) {
                 console.log(error)
                 setLoading(false)

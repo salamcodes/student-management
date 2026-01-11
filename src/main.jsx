@@ -26,7 +26,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='login' element={<Login />} />
 
 
-        <Route index element={<ProtectedRoutes component={<Dashboard />} role='Admin' />} />
+        <Route index element={<ProtectedRoutes Component={<Dashboard />} role='admin' />} />
 
         <Route path='students'>
           <Route index element={<ProtectedRoutes Component={<ViewStudents />} role='admin' />} />
