@@ -44,13 +44,13 @@ const ViewStudents = () => {
   {/* Buttons */}
   <div className="flex flex-wrap gap-2">
     <button
-      className="bg-gradient-to-r from-[#1F5FC4] to-[#00A86B] text-white px-4 py-2 rounded font-medium hover:opacity-90 transition"
+      className="bg-linear-to-r from-[#1F5FC4] to-[#00A86B] text-white px-4 py-2 rounded font-medium hover:opacity-90 transition"
     >
       + Register Student
     </button>
     <button
       onClick={() => navigate("/students/AddStudent")}
-      className="bg-gradient-to-r from-[#1F5FC4] to-[#00A86B] text-white px-4 py-2 rounded font-medium hover:opacity-90 transition"
+      className="bg-linear-to-r from-[#1F5FC4] to-[#00A86B] text-white px-4 py-2 rounded font-medium hover:opacity-90 transition"
     >
       + Add Student
     </button>
