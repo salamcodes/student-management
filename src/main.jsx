@@ -31,7 +31,8 @@ createRoot(document.getElementById('root')).render(
         <Route path='students'>
           <Route index element={<ProtectedRoutes Component={<ViewStudents />} role='admin' />} />
           <Route path='StudentDashboard' element={<ProtectedRoutes Component={<StudentDashboard />} role='admin' />} />
-          <Route path='Addstudent' element={<ProtectedRoutes Component={<AddStudent />} role='admin' />} />
+
+          <Route path='AddStudent' element={<ProtectedRoutes Component={<AddStudent />} role='admin' />} />
 
         </Route>
 
