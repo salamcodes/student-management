@@ -36,25 +36,26 @@ const ViewStudents = () => {
       <div className="flex-1 p-6 md:ml-64 bg-gray-100 min-h-screen">
 
         {/* Header */}
-        <div className="flex flex-col  items-center justify-between md:flex">
-          <h1 className="text-2xl font-semibold">Students</h1>
-          <div>
+       {/* Header */}
+<div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
+  {/* Page Title */}
+  <h1 className="text-2xl font-semibold text-[#1F5FC4]">Students</h1>
 
-
-            <button
-              onClick={() => navigate("/students/AddStudent")}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-medium cursor-pointer m-1"
-            >
-              + Register Student
-            </button>
-            <button
-              
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-medium cursor-pointer m-1"
-            >
-              + Add Student
-            </button>
-          </div>
-        </div>
+  {/* Buttons */}
+  <div className="flex flex-wrap gap-2">
+    <button
+      className="bg-gradient-to-r from-[#1F5FC4] to-[#00A86B] text-white px-4 py-2 rounded font-medium hover:opacity-90 transition"
+    >
+      + Register Student
+    </button>
+    <button
+      onClick={() => navigate("/students/AddStudent")}
+      className="bg-gradient-to-r from-[#1F5FC4] to-[#00A86B] text-white px-4 py-2 rounded font-medium hover:opacity-90 transition"
+    >
+      + Add Student
+    </button>
+  </div>
+</div>
 
         {/* Students Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 mt-6">

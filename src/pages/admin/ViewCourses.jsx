@@ -42,11 +42,11 @@ const ViewCourses = () => {
       <div className="flex-1 p-6">
         {/* Top Bar */}
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-xl font-semibold">Courses</h1>
+          <h1 className="text-xl font-semibold text-[#1F5FC4]">Courses</h1>
 
           <button
             onClick={() => navigate("/students/AddCourse")}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-medium cursor-pointer"
+            className="bg-linear-to-r from-[#1F5FC4] to-[#00A86B] text-white px-4 py-2 rounded font-medium cursor-pointer hover:opacity-90 transition"
           >
             + Add Course
           </button>
@@ -57,35 +57,32 @@ const ViewCourses = () => {
           {courses.map((c) => (
             <div
               key={c.id}
-              className="bg-white rounded-md shadow p-4 hover:shadow-md transition"
+              className="bg-linear-to-r from-[#1F5FC4] to-[#00A86B] rounded-md shadow p-4 hover:shadow-lg transition flex flex-col"
             >
               {/* Image */}
               <img
                 src={c.img}
                 alt={c.title}
-                className="rounded-md w-full h-32 object-cover mb-3"
+                className="rounded-md w-full h-32 object-cover mb-3 border border-white"
               />
 
               {/* Title */}
-              <h2 className="font-semibold text-lg">{c.title}</h2>
+              <h2 className="font-semibold text-lg text-white">{c.title}</h2>
 
               {/* Description */}
-              <p className="text-sm text-gray-600 mt-1">{c.desc}</p>
+              <p className="text-sm text-white/90 mt-1">{c.desc}</p>
 
               {/* Duration & Enrolled */}
-              <div className="mt-3 flex justify-between text-sm">
-                <span className="font-medium text-gray-700">
-                  Duration: {c.duration}
-                </span>
-                <span className="font-medium text-gray-700">
-                  Enrolled: {c.enrolled}
-                </span>
+              <div className="mt-3 flex justify-between text-sm text-white/90 font-medium">
+                <span>Duration: {c.duration}</span>
+                <span>Enrolled: {c.enrolled}</span>
               </div>
             </div>
           ))}
         </div>
       </div>
     </div>
+
   );
 };
 
