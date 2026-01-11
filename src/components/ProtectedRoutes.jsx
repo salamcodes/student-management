@@ -3,12 +3,12 @@ import { auth } from '../config/firebase/firebaseConfig'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
 import { db } from '../config/firebase/firebaseConfig';
-import { getDocs, collection, where, } from 'firebase/firestore';
+import { getDocs, collection, where, query } from 'firebase/firestore';
 
-const ProtectedRoutes = () => {
-    const [loading, setLoading] = useState(false);
+const ProtectedRoutes = ({ Component, role }) => {
+    const [loading, setLoading] = useState(true);
     const [isAllowed, setIsAllowed] = useState(false)
-
+    // const alloweRoles = ['admin', 'student']
     const navigate = useNavigate()
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, async (user) => {
@@ -34,7 +34,8 @@ const ProtectedRoutes = () => {
 
                 let userData = snapshot.docs[0].data()
 
-                if (role.includer(userData.role)) {
+                if (role.includes(userData.role)) {
+                    console.log(userData.role)
                     setIsAllowed(true)
                 } else {
                     setIsAllowed(false)
@@ -47,10 +48,11 @@ const ProtectedRoutes = () => {
                 setIsAllowed(false)
             }
         })
+
         return () => unsub()
 
     }, [role])
-
+    if (loading) return <h1>Loading..</h1>
 
     return isAllowed ? Component : <h1>Not Authorized</h1>
 }

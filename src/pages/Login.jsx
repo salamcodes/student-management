@@ -4,9 +4,7 @@ import { db } from '../config/firebase/firebaseConfig'
 import { auth } from '../config/firebase/firebaseConfig'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-// import { setRole } from '../config/reducers/authSlice'
-import { setLogin, setRole } from '../config/reducers/authSlice'
+
 
 
 
@@ -16,7 +14,6 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
@@ -46,8 +43,6 @@ const Login = () => {
       const userData = querySnapshot.docs[0].data();
       console.log(userData);
 
-      dispatch(setLogin(true))
-      dispatch(setRole(userData.role))
 
       userData.role === 'admin' ? navigate('/') : navigate('/profile')
 
