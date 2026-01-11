@@ -15,6 +15,7 @@ import AddCourses from './pages/admin/AddCourses.jsx'
 import AssignCourses from './pages/admin/AssignCourses.jsx'
 import MyCourses from './pages/students/MyCourses.jsx'
 import Profile from './pages/students/Profile.jsx'
+import ProtectedRoutes from './components/ProtectedRoutes.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -22,10 +23,13 @@ createRoot(document.getElementById('root')).render(
 
     <BrowserRouter>
       <Routes>
-        <Route index element={<Dashboard />} />
         <Route path='login' element={<Login />} />
+
+        
+        <Route index element={<Dashboard />} />
+
         <Route path='students'>
-          <Route index element={<ViewStudents />} />
+          <Route index element={<ProtectedRoutes component= {<ViewStudents />} role='Admin' />} />
           <Route path='StudentDashboard' element={<StudentDashboard />} />
           <Route path='Addstudent' element={<AddStudent />} />
 
