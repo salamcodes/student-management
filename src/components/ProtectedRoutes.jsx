@@ -21,7 +21,7 @@ const ProtectedRoutes = ({ Component, role }) => {
 
             try {
                 const q = query(
-                    collection(db, "user"),
+                    collection(db, "users"),
                     where('uid', '==', user.uid),
 
                 );

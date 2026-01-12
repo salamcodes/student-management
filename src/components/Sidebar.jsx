@@ -8,17 +8,23 @@ const Sidebar = () => {
         <>
             {/* Mobile Top Bar */}
             <div className="md:hidden flex items-center justify-between bg-[#1F5FC4] text-white p-4">
-                <div className="flex items-center gap-2">
-                    <span className="text-lg font-semibold">LearnSync</span>
-                </div>
-                <button onClick={() => setOpen(!open)} className="text-white">
-                    ☰
-                </button>
+                <span className="text-lg font-semibold">LearnSync</span>
+                <button onClick={() => setOpen(!open)}>☰</button>
             </div>
+
+            {/* Mobile Overlay */}
+            {open && (
+                <div
+                    className="fixed inset-0 bg-black/30 z-10 md:hidden"
+                    onClick={() => setOpen(false)}
+                />
+            )}
 
             {/* Sidebar */}
             <div
-                className={`${open ? "block" : "hidden"} md:block w-64 bg-[#1F5FC4] text-white h-screen p-4 fixed md:static z-20`}
+                className={`fixed md:static top-0 left-0 w-64 bg-[#1F5FC4] text-white h-screen p-4 z-20
+       transform transition-transform duration-300
+       ${open ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
             >
                 <div className="flex items-center gap-2 mb-8">
                     <span className="text-xl font-semibold">LearnSync</span>
@@ -40,8 +46,8 @@ const Sidebar = () => {
                     Logout
                 </button>
             </div>
-
         </>
+
     );
 };
 
