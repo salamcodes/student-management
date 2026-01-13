@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../config/firebase/firebaseConfig";
 import { signOut } from "firebase/auth";
-import { useSelector } from "react-redux";
 
 const Sidebar = () => {
     const [open, setOpen] = useState(false);
