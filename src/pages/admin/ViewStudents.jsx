@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../../components/Sidebar";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { collection, getDocs, query } from "firebase/firestore";
 
 
 const ViewStudents = () => {
   const navigate = useNavigate()
+
+
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      const querySnapshot = await getDocs(collection(db, "users")); const q = query(
+        collection(db, "users"),
+        where('role', '==', 'student'),
+
+      );
+
+      const studentData = querySnapshot.map({ id: doc.id, ...doc.data() })
+      dispatch(studentData)
+      console.log(data)
+    }
+  }, [studentData])
+
   const students = [
     {
       id: 1,
@@ -35,25 +56,23 @@ const ViewStudents = () => {
 
       <div className="flex-1 p-6 md:ml-64 bg-gray-100 min-h-screen">
 
-        {/* Header */}
-       {/* Header */}
-<div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
-  {/* Page Title */}
-  <h1 className="text-2xl font-semibold text-[#1F5FC4]">Students</h1>
 
-  {/* Buttons */}
-  <div className="flex flex-wrap gap-2">
-   
-    <button
-      onClick={() => navigate("/students/AddStudent")}
-      className="bg-linear-to-r from-[#1F5FC4] to-[#00A86B] text-white px-4 py-2 rounded font-medium hover:opacity-90 transition cursor-pointer"
-    >
-      + Add Student
-    </button>
-  </div>
-</div>
+        <div className="flex flex-col md:flex-row items-center justify-between mb-6 gap-4">
 
-        {/* Students Cards */}
+          <h1 className="text-2xl font-semibold text-[#1F5FC4]">Students</h1>
+
+          <div className="flex flex-wrap gap-2">
+
+            <button
+              onClick={() => navigate("/students/AddStudent")}
+              className="bg-linear-to-r from-[#1F5FC4] to-[#00A86B] text-white px-4 py-2 rounded font-medium hover:opacity-90 transition cursor-pointer"
+            >
+              + Add Student
+            </button>
+          </div>
+        </div>
+
+
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 mt-6">
           {students.map((student) => (
             <div
