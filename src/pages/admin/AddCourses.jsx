@@ -17,7 +17,7 @@ const AddCourses = () => {
 
   const courseData = {
     courseName,
-    Description: description.trimEnd(),
+    Description: description.trim(),
 
     Duration: duration
   }
