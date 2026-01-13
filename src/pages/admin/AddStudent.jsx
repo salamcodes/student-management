@@ -52,6 +52,12 @@ const AddStudent = () => {
       console.error("Error creating student:", error);
       alert(error.message || "Failed to register student. Please try again.");
     }
+
+    setName('')
+    setEmail('')
+    setPassword('')
+    setCourse('')
+    
   };
 
   return (
