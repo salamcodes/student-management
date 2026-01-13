@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Sidebar from "../../components/Sidebar";
-import { auth, db } from '../../config/firebase/firebaseConfig'
+import { secondaryAuth } from "../../config/firebase/secondaryFirebaseConfing";
+import { db } from "../../config/firebase/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addStudent } from "../../config/reducers/addStudentSlice";
@@ -19,32 +20,33 @@ const AddStudent = () => {
     e.preventDefault();
 
     try {
-     
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+      const userCredential = await createUserWithEmailAndPassword(secondaryAuth, email, password);
       const newUser = userCredential.user;
 
       console.log("New student UID:", newUser.uid);
 
-     
+
       const studentData = {
         uid: newUser.uid,
         name: name,
         email: email,
-        role: "student",      
+        role: "student",
         courses: [course],
-        
+
       };
 
-     
+
       await setDoc(doc(db, "users", newUser.uid), studentData);
 
-      
+      // await signOut(secondaryAuth)
+
       dispatch(addStudent(studentData));
 
       console.log("Student successfully created and saved");
 
       alert("Student registered successfully!");
-      
+
 
     } catch (error) {
       console.error("Error creating student:", error);

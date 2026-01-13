@@ -30,7 +30,7 @@ const Login = () => {
       console.log(user);
 
       const q = query(
-        collection(db, "user"),
+        collection(db, "users"),
         where("uid", "==", user.uid)
       );
 

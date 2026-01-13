@@ -8,7 +8,7 @@ import { getDocs, collection, where, query } from 'firebase/firestore';
 const ProtectedRoutes = ({ Component, role }) => {
     const [loading, setLoading] = useState(true);
     const [isAllowed, setIsAllowed] = useState(false)
-    // const alloweRoles = ['admin', 'student']
+    const alloweRoles = ['admin', 'student']
     const navigate = useNavigate()
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, async (user) => {
@@ -34,7 +34,7 @@ const ProtectedRoutes = ({ Component, role }) => {
 
                 let userData = snapshot.docs[0].data()
 
-                if (role.includes(userData.role)) {
+                if (alloweRoles.includes(userData.role)) {
                     console.log(userData.role)
                     setIsAllowed(true)
                     setLoading(false)
@@ -52,7 +52,7 @@ const ProtectedRoutes = ({ Component, role }) => {
 
         return () => unsub()
 
-    }, [role])
+    }, [])
     if (loading) return <h1>Loading..</h1>
 
     return isAllowed ? Component : <h1>Not Authorized</h1>
