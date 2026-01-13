@@ -38,29 +38,6 @@ const ViewStudents = () => {
   }, [])
 
 
-  // const students = [
-  //   {
-  //     id: 1,
-  //     name: "Ali Raza",
-  //     email: "ali@example.com",
-  //     courses: ["Math", "Physics", "English"],
-  //     img: "https://via.placeholder.com/80",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Fatima Khan",
-  //     email: "fatima@example.com",
-  //     courses: ["Biology", "Chemistry"],
-  //     img: "https://via.placeholder.com/80",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Abdul Salam",
-  //     email: "abdul@example.com",
-  //     courses: ["Math", "Computer", "Programming", "English"],
-  //     img: "https://via.placeholder.com/80",
-  //   },
-  // ];
 
   return (
     <div className="flex flex-col md:flex-row">
