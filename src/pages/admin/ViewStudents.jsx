@@ -3,7 +3,7 @@ import Sidebar from "../../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { db } from "../../config/firebase/firebaseConfig";
-import { collection, getDocs, query, where, doc } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { addStudent } from "../../config/reducers/addStudentSlice";
 
 
@@ -35,7 +35,7 @@ const ViewStudents = () => {
 
     }
     fetchStudents()
-  }, [dispatch])
+  }, [])
 
 
   // const students = [

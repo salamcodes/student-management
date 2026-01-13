@@ -1,8 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { auth } from "../config/firebase/firebaseConfig";
+import { signOut } from "firebase/auth";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
     const [open, setOpen] = useState(false);
+
+    const logOut = () => {
+
+        signOut(auth).then(() => {
+
+        }).catch((error) => {
+
+        });
+    }
 
     return (
         <>
@@ -42,7 +54,9 @@ const Sidebar = () => {
                     </Link>
                 </nav>
 
-                <button className="mt-8 bg-[#00A86B] hover:bg-[#007F50] p-2 rounded text-sm font-medium transition-colors">
+                <button
+                    onClick={logOut}
+                    className="mt-8 bg-[#00A86B] hover:bg-[#007F50] p-2 rounded text-sm font-medium transition-colors cursor-pointer">
                     Logout
                 </button>
             </div>
