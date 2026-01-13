@@ -9,7 +9,7 @@ export const addStudentSlice = createSlice({
 
     reducers: {
         addStudent: (state, action) => {
-            state.students.push(action.payload)
+            state.students = action.payload
         },
 
         removeStudent: (state, action) => {
