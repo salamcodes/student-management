@@ -31,7 +31,7 @@ const ViewStudents = () => {
         ...doc.data(),
       }));
       console.log('Student data from firebase' ,studentData)
-      // dispatch(addStudent(studentData))
+      dispatch(addStudent(studentData))
 
     }
     fetchStudents()
