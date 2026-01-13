@@ -29,8 +29,8 @@ const AddStudent = () => {
 
       const studentData = {
         uid: newUser.uid,
-        name: name,
-        email: email,
+        name: name.trim(),
+        email: email.trim(),
         role: "student",
         courses: [course],
 
@@ -39,7 +39,6 @@ const AddStudent = () => {
 
       await setDoc(doc(db, "users", newUser.uid), studentData);
 
-      // await signOut(secondaryAuth)
 
       dispatch(addStudent(studentData));
 
@@ -57,7 +56,7 @@ const AddStudent = () => {
     setEmail('')
     setPassword('')
     setCourse('')
-    
+
   };
 
   return (

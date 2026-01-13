@@ -12,7 +12,7 @@ const ViewStudents = () => {
 
 
   const students = useSelector(state => state.student.students)
-  console.log("Redux" , students)
+  // console.log("Redux" , students)
   const dispatch = useDispatch();
 
 
@@ -31,7 +31,7 @@ const ViewStudents = () => {
         ...doc.data(),
       }));
       console.log('Student data from firebase' ,studentData)
-      dispatch(addStudent(studentData))
+      // dispatch(addStudent(studentData))
 
     }
     fetchStudents()
