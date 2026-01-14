@@ -1,29 +1,30 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase/firebaseConfig";
 import { signOut } from "firebase/auth";
 
+
 const Sidebar = () => {
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate()
 
     const logOut = () => {
 
         signOut(auth).then(() => {
-
+            navigate('/login')
         }).catch((error) => {
-
+            alert(error)
         });
     }
 
     return (
         <>
-            {/* Mobile Top Bar */}
             <div className="md:hidden flex items-center justify-between bg-[#1F5FC4] text-white p-4">
                 <span className="text-lg font-semibold">LearnSync</span>
                 <button onClick={() => setOpen(!open)}>☰</button>
             </div>
 
-            {/* Mobile Overlay */}
+
             {open && (
                 <div
                     className="fixed inset-0 bg-black/30 z-10 md:hidden"
@@ -31,7 +32,6 @@ const Sidebar = () => {
                 />
             )}
 
-            {/* Sidebar */}
             <div
                 className={`fixed md:static top-0 left-0 w-64 bg-[#1F5FC4] text-white h-screen p-4 z-20
        transform transition-transform duration-300

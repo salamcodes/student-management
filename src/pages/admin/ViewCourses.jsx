@@ -9,8 +9,6 @@ const ViewCourses = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const selector = useSelector(state => state.course.course)
-  console.log(selector)
-
 
   useEffect(() => {
 
@@ -50,17 +48,13 @@ const ViewCourses = () => {
                 key={item.id}
                 className="bg-linear-to-r from-[#1F5FC4] to-[#00A86B] rounded-md shadow p-4 hover:shadow-lg transition flex flex-col m-2"
               >
-
-
                 <h2 className="font-semibold text-lg text-white">{item.courseName}</h2>
-
 
                 <p className="text-sm text-white/90 mt-1">{item.Description}</p>
 
-
                 <div className="mt-3 flex flex-col sm:flex-row justify-between text-sm text-white/90 font-medium gap-1 sm:gap-0">
                   <span>Duration: {item.Duration}</span>
-                  <span>Enrolled: 2</span>
+                  <span>Enrolled: {item.students.length}</span>
                 </div>
               </div>
             })
