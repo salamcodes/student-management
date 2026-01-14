@@ -30,8 +30,7 @@ createRoot(document.getElementById('root')).render(
 
         <Route path='students'>
           <Route index element={<ProtectedRoutes Component={<ViewStudents />} role='admin' />} />
-          <Route path='StudentDashboard' element={<ProtectedRoutes Component={<StudentDashboard />} role='admin' />} />
-
+  
           <Route path='AddStudent' element={<ProtectedRoutes Component={<AddStudent />} role='admin' />} />
 
         </Route>
@@ -42,7 +41,6 @@ createRoot(document.getElementById('root')).render(
           <Route path='AddCourses' element={<ProtectedRoutes Component={<AddCourses />} role='admin' />} />
 
         </Route>
-        <Route path='assign-course' element={<ProtectedRoutes Component={<AssignCourses />} role='admin' />} />
         <Route path='my-course' element={<ProtectedRoutes Component={<MyCourses />} role='student' />} />
         <Route path='profile' element={<ProtectedRoutes Component={<Profile />} role='student' />} />
       </Routes>

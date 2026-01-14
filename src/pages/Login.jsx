@@ -27,7 +27,7 @@ const Login = () => {
       );
 
       const user = userCredential.user;
-      console.log(user);
+      // console.log(user);
 
       const q = query(
         collection(db, "users"),
@@ -41,7 +41,7 @@ const Login = () => {
         return;
       }
       const userData = querySnapshot.docs[0].data();
-      console.log(userData);
+      // console.log(userData);
 
 
       userData.role === 'admin' ? navigate('/') : navigate('/profile')
