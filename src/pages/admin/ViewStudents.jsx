@@ -18,50 +18,49 @@ const ViewStudents = () => {
   // console.log("Redux" , students)
   const dispatch = useDispatch();
 
-  const [assigningStudentId, setAssigningStudentId] = useState(null);
+  const [assignId, setAssignId] = useState(null);
 
-  // Get all courses from Redux
-  const courses = useSelector(state => state.course.course) // Adjust based on your Redux structure
 
-  // Function to get available courses for a specific student
-  const getAvailableCourses = (studentCourses) => {
+  const courses = useSelector(state => state.course.course)
+
+  const availableCourses = (studentCourses) => {
     return courses.filter(course => !studentCourses.includes(course.id));
   };
 
-  // Handle course assignment
-  const handleAssignCourse = async (studentId, courseId, studentCourses) => {
+
+  const assignCourse = async (studentId, courseId, studentCourses) => {
     if (!courseId) return;
 
-    setAssigningStudentId(studentId);
+    setAssignId(studentId);
 
     try {
-      // Reference to student document
+
       const studentRef = doc(db, 'users', studentId);
-      // Reference to course document
+
       const courseRef = doc(db, 'courses', courseId);
-      // Update student document
+
       await updateDoc(studentRef, {
         courses: arrayUnion(courseId)
       });
-      // Update course document
+
       await updateDoc(courseRef, {
         students: arrayUnion(studentId)
       });
 
-      // Re-fetch students
+
       const updatedStudents = await fetchStudentData();
       dispatch(addStudent(updatedStudents));
 
-      // Re-fetch courses  
+
       const updatedCourses = await fetchCourseData();
       dispatch(addCourse(updatedCourses));
 
-      alert('Course assigned successfully!');
+      // alert('Course assigned successfully!');
 
     } catch (error) {
       alert('Failed to assign course. Please try again.');
     } finally {
-      setAssigningStudentId(null);
+      setAssignId(null);
     }
   };
 
@@ -144,19 +143,19 @@ const ViewStudents = () => {
                 <div className="flex gap-2 mt-auto">
                   <div className="flex gap-2 mt-auto">
                     <select
-                      onChange={(e) => handleAssignCourse(item.id, e.target.value, item.courses)}
-                      disabled={assigningStudentId === item.id || getAvailableCourses(item.courses).length === 0}
+                      onChange={(e) => assignCourse(item.id, e.target.value, item.courses)}
+                      disabled={assignId === item.id || availableCourses(item.courses).length === 0}
                       value=""
                       className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm px-3 py-2 rounded cursor-pointer disabled:bg-gray-400"
                     >
                       <option value="" disabled>
-                        {getAvailableCourses(item.courses).length === 0
+                        {availableCourses(item.courses).length === 0
                           ? 'No available courses'
-                          : assigningStudentId === item.id
+                          : assignId === item.id
                             ? 'Assigning...'
                             : 'Assign Course'}
                       </option>
-                      {getAvailableCourses(item.courses).map((course) => (
+                      {availableCourses(item.courses).map((course) => (
                         <option key={course.id} value={course.id}>
                           {course.courseName}
                         </option>
