@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import { db } from "../../config/firebase/firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
-
+import { fetchCourseData } from "../../services/courseService";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,53 +11,16 @@ const ViewCourses = () => {
   const selector = useSelector(state => state.course.course)
   console.log(selector)
 
-  async function fetchCourses() {
-
-    try {
-      const snapshot = await getDocs(collection(db, "courses"));
-      const course = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      dispatch(addCourse(course))
-
-    } catch (error) {
-      alert(error)
-    }
-
-
-  }
 
   useEffect(() => {
-    fetchCourses()
-  }, [])
 
-  const courses = [
-    {
-      id: 1,
-      title: "Web Development",
-      desc: "Learn HTML, CSS, JavaScript, and React.",
-      duration: "3 Months",
-      enrolled: 24,
-      img: "https://via.placeholder.com/200x120",
-    },
-    {
-      id: 2,
-      title: "Computer Science Basics",
-      desc: "Introduction to CS concepts and logic building.",
-      duration: "2 Months",
-      enrolled: 18,
-      img: "https://via.placeholder.com/200x120",
-    },
-    {
-      id: 3,
-      title: "Artificial Intelligence",
-      desc: "Understand neural networks, ML and AI fundamentals.",
-      duration: "4 Months",
-      enrolled: 10,
-      img: "https://via.placeholder.com/200x120",
-    },
-  ];
+    const getData = async () => {
+      const course = await fetchCourseData()
+      dispatch(addCourse(course))
+    }
+
+    getData()
+  }, [])
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">

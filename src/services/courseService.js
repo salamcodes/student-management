@@ -3,12 +3,13 @@ import { collection, getDocs } from "firebase/firestore";
 
 export async function fetchCourseData() {
 
-    const querySnapshot = await getDocs(collection(db, "courses"));
-    querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
-    });
+    const snapshot = await getDocs(collection(db, "courses"));
 
-console.log(querySnapshot)
+    const courses = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+    }))
+
+    return courses
 }
 
-fetchCourseData()

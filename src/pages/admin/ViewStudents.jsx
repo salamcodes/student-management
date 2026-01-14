@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import Sidebar from "../../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { db } from "../../config/firebase/firebaseConfig";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { fetchStudentData } from "../../services/studentService";
 import { addStudent } from "../../config/reducers/addStudentSlice";
 
 
@@ -15,28 +14,14 @@ const ViewStudents = () => {
   // console.log("Redux" , students)
   const dispatch = useDispatch();
 
-
   useEffect(() => {
-    const fetchStudents = async () => {
-
-      const q = query(
-        collection(db, "users"),
-        where('role', '==', 'student'),
-
-      );
-      const querySnapshot = await getDocs(q);
-
-      const studentData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      console.log('Student data from firebase' ,studentData)
+    const getData = async () => {
+      const studentData = await fetchStudentData()
       dispatch(addStudent(studentData))
-
     }
-    fetchStudents()
-  }, [])
+    getData()
 
+  }, [])
 
 
   return (
@@ -83,20 +68,20 @@ const ViewStudents = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                 {item.courses?.length > 0 ? (
-            item.courses.map((course, i) => (
-              <span
-                key={i}
-                className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded"
-              >
-                {course}
-              </span>
-            ))
-          ) : (
-            <span className="text-xs text-gray-500 italic">
-              No courses assigned
-            </span>
-          )}
+                  {item.courses?.length > 0 ? (
+                    item.courses.map((course, i) => (
+                      <span
+                        key={i}
+                        className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded"
+                      >
+                        {course}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-xs text-gray-500 italic">
+                      No courses assigned
+                    </span>
+                  )}
                 </div>
 
                 {/* Buttons Section */}

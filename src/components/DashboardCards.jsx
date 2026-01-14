@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 const DashboardCards = () => {
     const students = useSelector(state => state.student.students)
+    const courses = useSelector(state => state.course.course)
 
 
     return (
@@ -16,7 +17,7 @@ const DashboardCards = () => {
             {/* Total Courses */}
             <div className="p-5 rounded-lg shadow bg-linear-to-r from-[#1F5FC4] to-[#00A86B] text-white border border-transparent">
                 <p className="text-white text-sm">Total Courses</p>
-                <h2 className="text-3xl font-semibold mt-1">8</h2>
+                <h2 className="text-3xl font-semibold mt-1">{courses.length}</h2>
             </div>
 
             {/* Admin */}
