@@ -1,10 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { db } from "../../config/firebase/firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
 
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { addCourse } from "../../config/reducers/courseSlice";
 
 const ViewCourses = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const selector = useSelector(state => state.course.course)
+  console.log(selector)
+
+  async function fetchCourses() {
+
+    try {
+      const snapshot = await getDocs(collection(db, "courses"));
+      const course = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      dispatch(addCourse(course))
+
+    } catch (error) {
+      alert(error)
+    }
+
+
+  }
+
+  useEffect(() => {
+    fetchCourses()
+  }, [])
 
   const courses = [
     {
@@ -53,33 +81,31 @@ const ViewCourses = () => {
         </div>
 
         {/* Course Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {courses.map((c) => (
-            <div
-              key={c.id}
-              className="bg-linear-to-r from-[#1F5FC4] to-[#00A86B] rounded-md shadow p-4 hover:shadow-lg transition flex flex-col"
-            >
-              {/* Image */}
-              <img
-                src={c.img}
-                alt={c.title}
-                className="rounded-md w-full h-40 sm:h-32 object-cover mb-3 border border-white"
-              />
 
-              {/* Title */}
-              <h2 className="font-semibold text-lg text-white">{c.title}</h2>
+        {
+          selector?.length > 0 ? (
+            selector.map((item) => {
+              return <div
+                key={item.id}
+                className="bg-linear-to-r from-[#1F5FC4] to-[#00A86B] rounded-md shadow p-4 hover:shadow-lg transition flex flex-col m-2"
+              >
 
-              {/* Description */}
-              <p className="text-sm text-white/90 mt-1">{c.desc}</p>
+                {/* Title */}
+                <h2 className="font-semibold text-lg text-white">{item.courseName}</h2>
 
-              {/* Duration & Enrolled */}
-              <div className="mt-3 flex flex-col sm:flex-row justify-between text-sm text-white/90 font-medium gap-1 sm:gap-0">
-                <span>Duration: {c.duration}</span>
-                <span>Enrolled: {c.enrolled}</span>
+                {/* Description */}
+                <p className="text-sm text-white/90 mt-1">{item.Description}</p>
+
+                {/* Duration & Enrolled */}
+                <div className="mt-3 flex flex-col sm:flex-row justify-between text-sm text-white/90 font-medium gap-1 sm:gap-0">
+                  <span>Duration: {item.Duration}</span>
+                  <span>Enrolled: 20</span>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            })
+          ) : (<h1>Loading ...</h1>)
+        }
+
       </div>
     </div>
 

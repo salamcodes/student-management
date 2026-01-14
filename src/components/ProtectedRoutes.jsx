@@ -35,7 +35,7 @@ const ProtectedRoutes = ({ Component, role }) => {
                 let userData = snapshot.docs[0].data()
 
                 if (alloweRoles.includes(userData.role)) {
-                    
+
                     setIsAllowed(true)
                     setLoading(false)
                 } else {
@@ -53,7 +53,21 @@ const ProtectedRoutes = ({ Component, role }) => {
         return () => unsub()
 
     }, [])
-    if (loading) return <h1>Loading..</h1>
+    if (loading) {
+        return (
+            <div style={{
+                minHeight: '100vh',
+                background: 'white',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.5rem',
+                color: '#666'
+            }}>
+                <div>Loading... please wait</div>
+            </div>
+        )
+    }
 
     return isAllowed ? Component : <h1>Not Authorized</h1>
 }
