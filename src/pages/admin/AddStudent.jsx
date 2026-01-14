@@ -13,7 +13,7 @@ const AddStudent = () => {
   const [email, setEmail] = useState('')
   const [course, setCourse] = useState([])
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState('')
+  
   const dispatch = useDispatch()
 
   const add = async (e) => {
@@ -62,21 +62,21 @@ const AddStudent = () => {
   return (
   <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
 
-  {/* Sidebar */}
+  
   <Sidebar />
 
   {/* Main Content */}
   <div className="flex-1 p-4 md:p-6">
 
-    {/* Page Header */}
+    
     <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-3">
       <h1 className="text-2xl font-semibold text-gray-900">Add Student</h1>
     </div>
 
-    {/* Form Container */}
+    {/* Form */}
     <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md w-full max-w-xl mx-auto">
 
-      {/* Name */}
+      
       <input
         type="text"
         value={name}
@@ -86,7 +86,7 @@ const AddStudent = () => {
         className="border border-gray-300 p-2 rounded w-full mb-4 focus:outline-none focus:border-indigo-600"
       />
 
-      {/* Email */}
+      
       <input
         type="email"
         value={email}
@@ -96,7 +96,7 @@ const AddStudent = () => {
         className="border border-gray-300 p-2 rounded w-full mb-4 focus:outline-none focus:border-indigo-600"
       />
 
-      {/* Password */}
+      
       <input
         type="password"
         value={password}
@@ -106,7 +106,7 @@ const AddStudent = () => {
         className="border border-gray-300 p-2 rounded w-full mb-4 focus:outline-none focus:border-indigo-600"
       />
 
-      {/* Assign Courses */}
+      
       <div className="mb-4">
         <label className="font-medium block mb-2 text-gray-800">Assign Courses</label>
         <input
@@ -119,7 +119,7 @@ const AddStudent = () => {
         />
       </div>
 
-      {/* Role */}
+      
       <div className="mb-4">
         <label className="font-medium block mb-2 text-gray-800">Role</label>
         <input
@@ -130,7 +130,7 @@ const AddStudent = () => {
         />
       </div>
 
-      {/* Button */}
+      
       <button
         type="submit"
         onClick={add}

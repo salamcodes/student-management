@@ -29,7 +29,7 @@ const ViewCourses = () => {
 
       {/* Main Content */}
       <div className="flex-1 p-4 md:p-6">
-        {/* Top Bar */}
+        
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4 md:gap-0">
           <h1 className="text-xl font-semibold text-[#1F5FC4]">Courses</h1>
 
@@ -41,7 +41,7 @@ const ViewCourses = () => {
           </button>
         </div>
 
-        {/* Course Cards Grid */}
+        {/* Course Cards*/}
 
         {
           selector?.length > 0 ? (
@@ -51,13 +51,13 @@ const ViewCourses = () => {
                 className="bg-linear-to-r from-[#1F5FC4] to-[#00A86B] rounded-md shadow p-4 hover:shadow-lg transition flex flex-col m-2"
               >
 
-                {/* Title */}
+                
                 <h2 className="font-semibold text-lg text-white">{item.courseName}</h2>
 
-                {/* Description */}
+                
                 <p className="text-sm text-white/90 mt-1">{item.Description}</p>
 
-                {/* Duration & Enrolled */}
+                
                 <div className="mt-3 flex flex-col sm:flex-row justify-between text-sm text-white/90 font-medium gap-1 sm:gap-0">
                   <span>Duration: {item.Duration}</span>
                   <span>Enrolled: 20</span>

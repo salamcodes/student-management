@@ -84,7 +84,7 @@ const ViewStudents = () => {
                   )}
                 </div>
 
-                {/* Buttons Section */}
+                
                 <div className="flex gap-2 mt-auto">
                   <button className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm px-3 py-2 rounded cursor-pointer">
                     Assign Course

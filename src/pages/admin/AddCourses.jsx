@@ -37,7 +37,7 @@ const AddCourses = () => {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
 
-      {/* Sidebar */}
+     
       <Sidebar />
 
       {/* Main Content */}
@@ -47,10 +47,10 @@ const AddCourses = () => {
           Add Course
         </h2>
 
-        {/* Form Container */}
+        {/* Form  */}
         <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 max-w-lg w-full mx-auto">
 
-          {/* Course Name */}
+          
           <div className="mb-4">
             <label className="font-medium block mb-1 text-gray-800">Course Name</label>
             <input
@@ -63,7 +63,7 @@ const AddCourses = () => {
             />
           </div>
 
-          {/* Description */}
+          
           <div className="mb-4">
             <label className="font-medium block mb-1 text-gray-800">Description</label>
             <textarea
@@ -76,7 +76,7 @@ const AddCourses = () => {
             />
           </div>
 
-          {/* Duration */}
+          
           <div className="mb-4">
             <label className="font-medium block mb-1 text-gray-800">Duration</label>
             <input
