@@ -14,7 +14,7 @@ const AddCourses = () => {
   const courseData = {
     courseName,
     Description: description.trim(),
-
+    students: [],
     Duration: duration
   }
   const courseAdd = async (e) => {
@@ -37,7 +37,7 @@ const AddCourses = () => {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
 
-     
+
       <Sidebar />
 
       {/* Main Content */}
@@ -50,7 +50,7 @@ const AddCourses = () => {
         {/* Form  */}
         <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 max-w-lg w-full mx-auto">
 
-          
+
           <div className="mb-4">
             <label className="font-medium block mb-1 text-gray-800">Course Name</label>
             <input
@@ -63,7 +63,7 @@ const AddCourses = () => {
             />
           </div>
 
-          
+
           <div className="mb-4">
             <label className="font-medium block mb-1 text-gray-800">Description</label>
             <textarea
@@ -76,7 +76,7 @@ const AddCourses = () => {
             />
           </div>
 
-          
+
           <div className="mb-4">
             <label className="font-medium block mb-1 text-gray-800">Duration</label>
             <input

@@ -4,23 +4,76 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStudentData } from "../../services/studentService";
 import { addStudent } from "../../config/reducers/addStudentSlice";
-
+import { db } from "../../config/firebase/firebaseConfig";
+import { fetchCourseData } from "../../services/courseService";
+import { addCourse } from '../../config/reducers/courseSlice'
+import { useState } from "react";
+import { doc, updateDoc } from "firebase/firestore";
+import { arrayUnion } from "firebase/firestore";
 
 const ViewStudents = () => {
   const navigate = useNavigate()
-
 
   const students = useSelector(state => state.student.students)
   // console.log("Redux" , students)
   const dispatch = useDispatch();
 
+  const [assigningStudentId, setAssigningStudentId] = useState(null);
+
+  // Get all courses from Redux
+  const courses = useSelector(state => state.course.course) // Adjust based on your Redux structure
+
+  // Function to get available courses for a specific student
+  const getAvailableCourses = (studentCourses) => {
+    return courses.filter(course => !studentCourses.includes(course.id));
+  };
+
+  // Handle course assignment
+  const handleAssignCourse = async (studentId, courseId, studentCourses) => {
+    if (!courseId) return;
+
+    setAssigningStudentId(studentId);
+
+    try {
+      // Reference to student document
+      const studentRef = doc(db, 'users', studentId);
+      // Reference to course document
+      const courseRef = doc(db, 'courses', courseId);
+      // Update student document
+      await updateDoc(studentRef, {
+        courses: arrayUnion(courseId)
+      });
+      // Update course document
+      await updateDoc(courseRef, {
+        students: arrayUnion(studentId)
+      });
+
+      // Re-fetch students
+      const updatedStudents = await fetchStudentData();
+      dispatch(addStudent(updatedStudents));
+
+      // Re-fetch courses  
+      const updatedCourses = await fetchCourseData();
+      dispatch(addCourse(updatedCourses));
+
+      alert('Course assigned successfully!');
+
+    } catch (error) {
+      alert('Failed to assign course. Please try again.');
+    } finally {
+      setAssigningStudentId(null);
+    }
+  };
+
   useEffect(() => {
     const getData = async () => {
-      const studentData = await fetchStudentData()
-      dispatch(addStudent(studentData))
-    }
-    getData()
+      const studentData = await fetchStudentData();
+      dispatch(addStudent(studentData));
 
+      const coursesData = await fetchCourseData();
+      dispatch(addCourse(coursesData));
+    }
+    getData();
   }, [])
 
 
@@ -69,14 +122,17 @@ const ViewStudents = () => {
 
                 <div className="flex flex-wrap gap-2">
                   {item.courses?.length > 0 ? (
-                    item.courses.map((course, i) => (
-                      <span
-                        key={i}
-                        className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded"
-                      >
-                        {course}
-                      </span>
-                    ))
+                    item.courses.map((courseId, i) => {
+                      const course = courses.find(c => c.id === courseId);
+                      return (
+                        <span
+                          key={i}
+                          className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded"
+                        >
+                          {course?.courseName || courseId}
+                        </span>
+                      );
+                    })
                   ) : (
                     <span className="text-xs text-gray-500 italic">
                       No courses assigned
@@ -84,11 +140,29 @@ const ViewStudents = () => {
                   )}
                 </div>
 
-                
+
                 <div className="flex gap-2 mt-auto">
-                  <button className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm px-3 py-2 rounded cursor-pointer">
-                    Assign Course
-                  </button>
+                  <div className="flex gap-2 mt-auto">
+                    <select
+                      onChange={(e) => handleAssignCourse(item.id, e.target.value, item.courses)}
+                      disabled={assigningStudentId === item.id || getAvailableCourses(item.courses).length === 0}
+                      value=""
+                      className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm px-3 py-2 rounded cursor-pointer disabled:bg-gray-400"
+                    >
+                      <option value="" disabled>
+                        {getAvailableCourses(item.courses).length === 0
+                          ? 'No available courses'
+                          : assigningStudentId === item.id
+                            ? 'Assigning...'
+                            : 'Assign Course'}
+                      </option>
+                      {getAvailableCourses(item.courses).map((course) => (
+                        <option key={course.id} value={course.id}>
+                          {course.courseName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
               </div>
