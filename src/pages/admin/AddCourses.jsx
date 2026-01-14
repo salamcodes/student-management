@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import { db } from "../../config/firebase/firebaseConfig";
 import { addDoc, collection } from "firebase/firestore";
+import { fetchCourseData } from "../../services/courseService";
 
 
 
@@ -34,6 +35,8 @@ const AddCourses = () => {
     setDescription('');
     setDuration('')
   }
+
+  
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
 
