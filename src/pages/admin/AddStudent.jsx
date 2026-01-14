@@ -134,7 +134,7 @@ const AddStudent = () => {
       <button
         type="submit"
         onClick={add}
-        className="w-full py-2 rounded-lg text-white font-semibold transition-all cursor-pointer bg-gradient-to-r from-[#1F5FC4] to-[#00A86B] hover:opacity-90"
+        className="w-full py-2 rounded-lg text-white font-semibold transition-all cursor-pointer bg-linear-to-r from-[#1F5FC4] to-[#00A86B] hover:opacity-90"
       >
         Add Student
       </button>

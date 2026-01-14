@@ -92,7 +92,7 @@ const AddCourses = () => {
           {/* Submit Button */}
           <button
             onClick={courseAdd}
-            className="w-full py-2 rounded-lg text-white font-semibold bg-gradient-to-r from-[#1F5FC4] to-[#00A86B] hover:opacity-90 transition cursor-pointer"
+            className="w-full py-2 rounded-lg text-white font-semibold bg-linear-to-r from-[#1F5FC4] to-[#00A86B] hover:opacity-90 transition cursor-pointer"
           >
             Add Course
           </button>
