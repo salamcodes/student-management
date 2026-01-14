@@ -34,7 +34,7 @@ const ProtectedRoutes = ({ Component, role }) => {
 
                 let userData = snapshot.docs[0].data()
 
-                if (isAllowed.includes(userData.role)) {
+                if (alloweRoles.includes(userData.role)) {
 
                     setIsAllowed(true)
                     setLoading(false)
