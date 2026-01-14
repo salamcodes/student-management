@@ -112,7 +112,7 @@ const AddStudent = () => {
         <input
           type="text"
           value={course}
-          required
+          
           onChange={(e) => setCourse(e.target.value)}
           placeholder="Enter course(s)"
           className="border p-2 rounded w-full"
