@@ -80,6 +80,7 @@ const AddStudent = () => {
       <input
         type="text"
         value={name}
+        required
         onChange={(e) => setName(e.target.value)}
         placeholder="Student Name"
         className="border border-gray-300 p-2 rounded w-full mb-4 focus:outline-none focus:border-indigo-600"
@@ -91,6 +92,7 @@ const AddStudent = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Student Email"
+        required
         className="border border-gray-300 p-2 rounded w-full mb-4 focus:outline-none focus:border-indigo-600"
       />
 
@@ -100,6 +102,7 @@ const AddStudent = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Student Password"
+        required
         className="border border-gray-300 p-2 rounded w-full mb-4 focus:outline-none focus:border-indigo-600"
       />
 
@@ -109,6 +112,7 @@ const AddStudent = () => {
         <input
           type="text"
           value={course}
+          required
           onChange={(e) => setCourse(e.target.value)}
           placeholder="Enter course(s)"
           className="border p-2 rounded w-full"

@@ -56,6 +56,7 @@ const AddCourses = () => {
             <input
               type="text"
               value={courseName}
+              required
               onChange={(e) => setCourseName(e.target.value)}
               placeholder="Enter Course Name"
               className="border p-2 rounded w-full focus:ring-2 focus:ring-[#1F5FC4]/50 outline-none"
@@ -68,6 +69,7 @@ const AddCourses = () => {
             <textarea
               placeholder="Enter Course Description"
               value={description}
+              required
               onChange={(e) => setDescription(e.target.value)}
               className="border p-2 rounded w-full resize-none focus:ring-2 focus:ring-[#1F5FC4]/50 outline-none"
               rows={3}
@@ -80,6 +82,7 @@ const AddCourses = () => {
             <input
               type="text"
               value={duration}
+              required
               onChange={(e) => setDuration(e.target.value)}
               placeholder="e.g. 3 Months, 12 Weeks"
               className="border p-2 rounded w-full focus:ring-2 focus:ring-[#1F5FC4]/50 outline-none"
