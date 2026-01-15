@@ -18,23 +18,20 @@ const StudentProfile = () => {
             setData(response)
 
             const courses = await fetchCourseData()
-            const course = courses.filter((item) => item.id !== user.uid)
+            const course = courses.filter((item, i) => {
+                return item.students[i] === user.uid
+            })
             setStudentCourses(course)
-            // console.log(course)
         };
+
 
         getData();
     }, []);
 
     return (
         <>
-            {!data && <h1>Loading...</h1>}
-
-
 
             <div className="flex w-full min-h-screen bg-[#F4F7FE]">
-
-
 
                 {/* Main */}
                 <div className="flex-1 p-6 overflow-auto">
@@ -42,7 +39,7 @@ const StudentProfile = () => {
                     <h1 className="text-2xl font-semibold mb-6 text-[#1F5FC4]">Student Dashboard</h1>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
+                        {!data && <h1>Loading...</h1>}
                         <div className="bg-white rounded-xl shadow-md p-6 border border-[#E5ECFB]">
 
                             <h2 className="text-xl font-semibold text-[#1F5FC4]">Student Profile</h2>
@@ -51,14 +48,15 @@ const StudentProfile = () => {
                                 data &&
 
                                 <div className="space-y-2 text-gray-700">
-                                    <p><span className="font-medium">Name:</span>{data.name} </p>
-                                    <p><span className="font-medium">Email:</span> {data.email} </p>
-                                    <p><span className="font-medium">User ID:</span> {data.uid} </p>
-                                    <p><span className="font-medium">Role:</span> {data.role} </p>
+                                    <p><span className="font-medium">Name: </span>{data.name} </p>
+                                    <p><span className="font-medium">Email: </span> {data.email} </p>
+                                    <p><span className="font-medium">User ID: </span> {data.uid} </p>
+                                    <p><span className="font-medium">Role: </span> {data.role} </p>
                                 </div>
                             }
 
                         </div>
+
 
                         {/* Courses */}
                         <div className="bg-white rounded-xl shadow-md p-6 border border-[#E5ECFB]">
@@ -92,7 +90,3 @@ const StudentProfile = () => {
 }
 
 export default StudentProfile
-
-
-
-

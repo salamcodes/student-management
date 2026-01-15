@@ -24,9 +24,11 @@ const ViewCourses = () => {
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
       <Sidebar />
 
-      {/* Main Content with fixed header and scrollable cards */}
+      {/* Main Content */}
       <div className="flex-1 flex flex-col md:h-screen">
-        {/* Fixed Header */}
+
+        {/* Header */}
+
         <div className="bg-gray-100 p-4 md:p-6 border-b border-gray-200">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-0">
             <h1 className="text-xl font-semibold text-[#1F5FC4]">Courses</h1>
@@ -39,14 +41,14 @@ const ViewCourses = () => {
           </div>
         </div>
 
-        {/* Scrollable Course Cards Container */}
+        {/*  Course Cards */}
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {selector?.length > 0 ? (
               selector.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-gradient-to-r from-[#1F5FC4] to-[#00A86B] rounded-md shadow p-4 hover:shadow-lg transition flex flex-col"
+                  className="bg-linear-to-r from-[#1F5FC4] to-[#00A86B] rounded-md shadow p-4 hover:shadow-lg transition flex flex-col"
                 >
                   <h2 className="font-semibold text-lg text-white">{item.courseName}</h2>
                   <p className="text-sm text-white/90 mt-1">{item.Description}</p>
