@@ -43,7 +43,6 @@ const StudentProfile = () => {
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-                        {/* Profile Card */}
                         <div className="bg-white rounded-xl shadow-md p-6 border border-[#E5ECFB]">
 
                             <h2 className="text-xl font-semibold text-[#1F5FC4]">Student Profile</h2>
@@ -61,7 +60,7 @@ const StudentProfile = () => {
 
                         </div>
 
-                        {/* Courses Card */}
+                        {/* Courses */}
                         <div className="bg-white rounded-xl shadow-md p-6 border border-[#E5ECFB]">
 
                             <h2 className="text-xl font-semibold text-[#1F5FC4]">Enrolled Courses</h2>
