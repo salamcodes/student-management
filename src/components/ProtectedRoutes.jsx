@@ -1,58 +1,17 @@
-import React, { Component, useEffect, useState } from 'react'
-import { auth } from '../config/firebase/firebaseConfig'
-import { onAuthStateChanged } from 'firebase/auth'
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../config/firebase/firebaseConfig';
-import { getDocs, collection, where, query } from 'firebase/firestore';
+import { useAuth } from '../context/AuthContext';
 
 const ProtectedRoutes = ({ Component, role }) => {
-    const [loading, setLoading] = useState(true);
-    const [isAllowed, setIsAllowed] = useState(false)
-    const alloweRoles = ['admin', 'student']
-    const navigate = useNavigate()
+    const { currentUser, userRole, loading } = useAuth();
+    const navigate = useNavigate();
+
     useEffect(() => {
-        const unsub = onAuthStateChanged(auth, async (user) => {
-            if (!user) {
-                setLoading(false)
-                setIsAllowed(false)
-                navigate('login')
-                return
-            }
+        if (!loading && !currentUser) {
+            navigate('/login');
+        }
+    }, [loading, currentUser, navigate]);
 
-            try {
-                const q = query(
-                    collection(db, "users"),
-                    where('uid', '==', user.uid),
-
-                );
-                const snapshot = await getDocs(q)
-                if (snapshot.empty) {
-                    setLoading(false)
-                    setIsAllowed(false)
-                    return
-                }
-
-                let userData = snapshot.docs[0].data()
-
-                if (alloweRoles.includes(userData.role)) {
-
-                    setIsAllowed(true)
-                    setLoading(false)
-                } else {
-                    setIsAllowed(false)
-                }
-
-                setLoading(false)
-            } catch (error) {
-                console.log(error)
-                setLoading(false)
-                setIsAllowed(false)
-            }
-        })
-
-        return () => unsub()
-
-    }, [])
     if (loading) {
         return (
             <div style={{
@@ -66,10 +25,29 @@ const ProtectedRoutes = ({ Component, role }) => {
             }}>
                 <div>Loading... please wait</div>
             </div>
-        )
+        );
     }
 
-    return isAllowed ? Component : <h1>Not Authorized</h1>
-}
+    if (!currentUser) {
+        return null; // Will redirect in useEffect
+    }
 
-export default ProtectedRoutes
+    if (userRole !== role) {
+        return (
+            <div style={{
+                minHeight: '100vh',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.5rem',
+                color: '#666'
+            }}>
+                <h1>Not Authorized</h1>
+            </div>
+        );
+    }
+
+    return Component;
+};
+
+export default ProtectedRoutes;
