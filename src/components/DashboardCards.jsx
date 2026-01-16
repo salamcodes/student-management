@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import { fetchStudentData } from '../services/studentService';
 import { fetchCourseData } from '../services/courseService';
-import { auth } from '../config/firebase/firebaseConfig';
-import { profileData } from '../services/singleDoc';
+
 
 
 const DashboardCards = () => {
     const [student, setStudent] = useState('')
     const [course, setCourse] = useState('')
-    const [admin, setAdmin] = useState('')
 
     useEffect(() => {
         const getData = async () => {
