@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../config/firebase/firebaseConfig'
 import { useNavigate } from 'react-router-dom'
@@ -64,7 +64,7 @@ const Login = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit}>
-        
+
           <div className="mb-4">
             <label className="block mb-2 text-sm font-medium text-gray-700">
               Email
