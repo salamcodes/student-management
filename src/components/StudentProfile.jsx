@@ -2,13 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { profileData } from '../services/singleDoc'
 import { auth } from '../config/firebase/firebaseConfig'
 import { fetchCourseData } from '../services/courseService'
+import { signOut } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
 
 
 
 const StudentProfile = () => {
     const [data, setData] = useState()
     const [studentCourses, setStudentCourses] = useState('')
+    const navigate = useNavigate()
 
+    const logOut = () => {
+
+        signOut(auth).then(() => {
+            navigate('/login')
+        }).catch((error) => {
+            alert(error)
+        });
+    }
     useEffect(() => {
         const getData = async () => {
             const user = auth.currentUser;
@@ -36,7 +47,16 @@ const StudentProfile = () => {
                 {/* Main */}
                 <div className="flex-1 p-6 overflow-auto">
 
-                    <h1 className="text-2xl font-semibold mb-6 text-[#1F5FC4]">Student Dashboard</h1>
+                    {/* Header with Title and Logout Button */}
+                    <div className="flex justify-between items-center mb-6">
+                        <h1 className="text-2xl font-semibold text-[#1F5FC4]">Student Dashboard</h1>
+                        <button
+                            onClick={logOut}
+                            className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors duration-200 shadow-sm cursor-pointer"
+                        >
+                            Log Out
+                        </button>
+                    </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         {!data && <h1>Loading...</h1>}
@@ -83,7 +103,6 @@ const StudentProfile = () => {
                     </div>
                 </div>
             </div>
-
 
         </>
     )
