@@ -1,4 +1,4 @@
-import { getDoc , doc } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 import { db } from "../config/firebase/firebaseConfig";
 
 export async function profileData(uid) {
