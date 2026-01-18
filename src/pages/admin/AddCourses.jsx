@@ -21,13 +21,12 @@ const AddCourses = () => {
     e.preventDefault()
 
     try {
-      const docRef = await addDoc(collection(db, "courses"), courseData
+      await addDoc(collection(db, "courses"), courseData
       );
-      console.log("Document written with ID: ", docRef.id);
       alert('Course added successfully')
 
     } catch (e) {
-      console.error("Error adding document: ", e);
+      aler('Error occured', e)
     }
 
     setCourseName('');
@@ -49,7 +48,7 @@ const AddCourses = () => {
           Add Course
         </h2>
 
-        {/* Form  */}
+
         <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 max-w-lg w-full mx-auto">
 
 
@@ -91,9 +90,10 @@ const AddCourses = () => {
             />
           </div>
 
-          {/* Submit Button */}
+
           <button
             onClick={courseAdd}
+            type="submit"
             className="w-full py-2 rounded-lg text-white font-semibold bg-linear-to-r from-[#1F5FC4] to-[#00A86B] hover:opacity-90 transition cursor-pointer"
           >
             Add Course

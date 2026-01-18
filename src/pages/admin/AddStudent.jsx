@@ -25,8 +25,6 @@ const AddStudent = () => {
       const userCredential = await createUserWithEmailAndPassword(secondaryAuth, email, password);
       const newUser = userCredential.user;
 
-      console.log("New student UID:", newUser.uid);
-
 
       const studentData = {
         uid: newUser.uid,
@@ -43,14 +41,13 @@ const AddStudent = () => {
 
       dispatch(addStudent(studentData));
 
-      console.log("Student successfully created and saved");
 
       alert("Student registered successfully!");
  
 
 
     } catch (error) {
-      console.error("Error creating student:", error);
+      
       alert(error.message || "Failed to register student. Please try again.");
     }
 
