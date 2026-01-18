@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 
 const StudentProfile = () => {
     const [data, setData] = useState()
-    const [studentCourses, setStudentCourses] = useState('')
+    const [studentCourses, setStudentCourses] = useState([])
     const navigate = useNavigate()
 
     const logOut = () => {
@@ -29,9 +29,9 @@ const StudentProfile = () => {
             setData(response)
 
             const courses = await fetchCourseData()
-            const course = courses.filter((item, i) => {
-                return item.students[i] === user.uid
-            })
+            const course = courses.filter(item => item.students.includes(user.uid));
+
+            // console.log(course)
             setStudentCourses(course)
         };
 
@@ -47,7 +47,7 @@ const StudentProfile = () => {
                 {/* Main */}
                 <div className="flex-1 p-6 overflow-auto">
 
-                    
+
                     <div className="flex justify-between items-center mb-6">
                         <h1 className="text-2xl font-semibold text-[#1F5FC4]">Student Dashboard</h1>
                         <button

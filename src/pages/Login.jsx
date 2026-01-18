@@ -97,7 +97,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 rounded-lg text-white font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-2 rounded-lg text-white font-semibold transition-all disabled:opacity-50 cursor-pointer"
             style={{
               background: "linear-gradient(90deg, #1F5FC4, #00A86B)"
             }}

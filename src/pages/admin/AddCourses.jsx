@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import { db } from "../../config/firebase/firebaseConfig";
 import { addDoc, collection } from "firebase/firestore";
-import { fetchCourseData } from "../../services/courseService";
 
 
 

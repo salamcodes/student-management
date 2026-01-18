@@ -11,8 +11,9 @@ import { doc, setDoc } from "firebase/firestore";
 const AddStudent = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('')
-  const [course, setCourse] = useState([])
+
   const [password, setPassword] = useState('')
+
 
   const dispatch = useDispatch()
 
@@ -31,8 +32,8 @@ const AddStudent = () => {
         uid: newUser.uid,
         name: name.trim(),
         email: email.trim(),
-        role: "student",
-        courses: [course],
+        role: 'student',
+        courses: [],
 
       };
 
@@ -45,6 +46,7 @@ const AddStudent = () => {
       console.log("Student successfully created and saved");
 
       alert("Student registered successfully!");
+ 
 
 
     } catch (error) {
@@ -107,7 +109,7 @@ const AddStudent = () => {
           />
 
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="font-medium block mb-2 text-gray-800">Assign Courses</label>
             <input
               type="text"
@@ -117,18 +119,19 @@ const AddStudent = () => {
               placeholder="Enter course(s)"
               className="border p-2 rounded w-full"
             />
-          </div>
+          </div> */}
 
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="font-medium block mb-2 text-gray-800">Role</label>
             <input
               type="text"
-              value="student"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
               readOnly
               className="border p-2 rounded w-full bg-gray-200 text-gray-600"
             />
-          </div>
+          </div> */}
 
 
           <button
