@@ -29,7 +29,7 @@ const ProtectedRoutes = ({ Component, role }) => {
     }
 
     if (!currentUser) {
-        return null; 
+        return null;
     }
 
     if (userRole !== role) {
